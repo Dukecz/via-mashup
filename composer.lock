@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "61966804c640ee5b1a558a9f5e5eed37",
+    "hash": "5644d81cdc885d7851ddac6f35d0567a",
     "packages": [
         {
             "name": "latte/latte",
-            "version": "v2.3.5",
+            "version": "v2.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/latte.git",
-                "reference": "3d47b0af6967c99df203e98cce6201b5d84b5ea4"
+                "reference": "b6e090e461c9cd88d60ae79a7713990b17b1531c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/3d47b0af6967c99df203e98cce6201b5d84b5ea4",
-                "reference": "3d47b0af6967c99df203e98cce6201b5d84b5ea4",
+                "url": "https://api.github.com/repos/nette/latte/zipball/b6e090e461c9cd88d60ae79a7713990b17b1531c",
+                "reference": "b6e090e461c9cd88d60ae79a7713990b17b1531c",
                 "shasum": ""
             },
             "require": {
@@ -59,20 +59,149 @@
                 "templating",
                 "twig"
             ],
-            "time": "2015-10-09 15:29:11"
+            "time": "2015-11-07 22:54:05"
         },
         {
-            "name": "nette/application",
-            "version": "v2.3.6",
+            "name": "luracast/restler",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nette/application.git",
-                "reference": "68db80ce58a5039656f11409acc597a4ea8d817d"
+                "url": "https://github.com/Luracast/Restler.git",
+                "reference": "1dcf910c1e1fd1ea565a537b053a66971d818e42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/application/zipball/68db80ce58a5039656f11409acc597a4ea8d817d",
-                "reference": "68db80ce58a5039656f11409acc597a4ea8d817d",
+                "url": "https://api.github.com/repos/Luracast/Restler/zipball/1dcf910c1e1fd1ea565a537b053a66971d818e42",
+                "reference": "1dcf910c1e1fd1ea565a537b053a66971d818e42",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "conflict": {
+                "restler/framework": "3.*"
+            },
+            "require-dev": {
+                "behat/behat": "2.5.*@stable",
+                "bshaffer/oauth2-server-php": "v1.0",
+                "guzzle/guzzle": "~3.1.1",
+                "illuminate/view": "4.2.*",
+                "luracast/explorer": "*",
+                "mustache/mustache": "dev-master",
+                "rodneyrehm/plist": "dev-master",
+                "symfony/yaml": "*",
+                "twig/twig": "v1.13.0",
+                "zendframework/zendamf": "dev-master"
+            },
+            "suggest": {
+                "behat/behat": "Behaviour driven development testing framework (see require-dev for details)",
+                "bshaffer/oauth2-server-php": "Restler can provide OAuth2 authentication using this library (see require-dev for details)",
+                "guzzle/guzzle": "RESTful api HTTP client framework (see require-dev for details)",
+                "illuminate/view": "Restler can render HtmlView using laravel blade templates (see require-dev for details)",
+                "luracast/explorer": "Restler's very own api explorer (see require-dev for details)",
+                "mustache/mustache": "Restler can render HtmlView using mustache/handlebar templates (see require-dev for details)",
+                "rodneyrehm/plist": "Restler supports tho Apple plist xml format (see require-dev for details)",
+                "symfony/yaml": "Restler can produce content in yaml format as well (see require-dev for details)",
+                "twig/twig": "Restler can render HtmlView using twig templates (see require-dev for details)",
+                "zendframework/zendamf": "Support for the amf document format  (see require-dev for details)"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "v3": "v3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Luracast\\Restler": "vendor/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Luracast",
+                    "email": "arul@luracast.com"
+                },
+                {
+                    "name": "Nick nickl- Lombard",
+                    "email": "github@jigsoft.co.za"
+                }
+            ],
+            "description": "Restler is a simple and effective multi-format Web API Server framework written in PHP. Just deal with your business logic in php, Restler will take care of the REST!",
+            "homepage": "http://luracast.com/products/restler/",
+            "keywords": [
+                "api",
+                "framework",
+                "rest",
+                "server"
+            ],
+            "time": "2015-08-04 07:52:49"
+        },
+        {
+            "name": "nategood/httpful",
+            "version": "0.2.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nategood/httpful.git",
+                "reference": "c1cd4d46a4b281229032cf39d4dd852f9887c0f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nategood/httpful/zipball/c1cd4d46a4b281229032cf39d4dd852f9887c0f6",
+                "reference": "c1cd4d46a4b281229032cf39d4dd852f9887c0f6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Httpful": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nate Good",
+                    "email": "me@nategood.com",
+                    "homepage": "http://nategood.com"
+                }
+            ],
+            "description": "A Readable, Chainable, REST friendly, PHP HTTP Client",
+            "homepage": "http://github.com/nategood/httpful",
+            "keywords": [
+                "api",
+                "curl",
+                "http",
+                "requests",
+                "rest",
+                "restful"
+            ],
+            "time": "2015-10-26 16:11:30"
+        },
+        {
+            "name": "nette/application",
+            "version": "v2.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/application.git",
+                "reference": "8e87ae81c2098abd7895bfd96d9fac1cd332abc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/application/zipball/8e87ae81c2098abd7895bfd96d9fac1cd332abc3",
+                "reference": "8e87ae81c2098abd7895bfd96d9fac1cd332abc3",
                 "shasum": ""
             },
             "require": {
@@ -121,7 +250,7 @@
             ],
             "description": "Nette Application MVC Component",
             "homepage": "https://nette.org",
-            "time": "2015-10-09 14:57:21"
+            "time": "2015-10-13 14:33:28"
         },
         {
             "name": "nette/bootstrap",
@@ -455,16 +584,16 @@
         },
         {
             "name": "nette/forms",
-            "version": "v2.3.4",
+            "version": "v2.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/forms.git",
-                "reference": "e4e3777c7a783f1877eda4a07ff2f128bdd05bf9"
+                "reference": "5e07a7b7180e5e88db9d44e12f1677e36b4f164b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/forms/zipball/e4e3777c7a783f1877eda4a07ff2f128bdd05bf9",
-                "reference": "e4e3777c7a783f1877eda4a07ff2f128bdd05bf9",
+                "url": "https://api.github.com/repos/nette/forms/zipball/5e07a7b7180e5e88db9d44e12f1677e36b4f164b",
+                "reference": "5e07a7b7180e5e88db9d44e12f1677e36b4f164b",
                 "shasum": ""
             },
             "require": {
@@ -497,16 +626,16 @@
             "authors": [
                 {
                     "name": "David Grudl",
-                    "homepage": "http://davidgrudl.com"
+                    "homepage": "https://davidgrudl.com"
                 },
                 {
                     "name": "Nette Community",
-                    "homepage": "http://nette.org/contributors"
+                    "homepage": "https://nette.org/contributors"
                 }
             ],
             "description": "Nette Forms: greatly facilitates web forms",
-            "homepage": "http://nette.org",
-            "time": "2015-07-20 01:25:35"
+            "homepage": "https://nette.org",
+            "time": "2015-10-19 01:41:55"
         },
         {
             "name": "nette/http",
@@ -982,16 +1111,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.3.5",
+            "version": "v2.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "d2fd27b86871c95fb6dce7479c2797cf60b9d294"
+                "reference": "79831c75b6f48fcb897d25ccae5deec358cb2142"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/d2fd27b86871c95fb6dce7479c2797cf60b9d294",
-                "reference": "d2fd27b86871c95fb6dce7479c2797cf60b9d294",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/79831c75b6f48fcb897d25ccae5deec358cb2142",
+                "reference": "79831c75b6f48fcb897d25ccae5deec358cb2142",
                 "shasum": ""
             },
             "require": {
@@ -1033,22 +1162,22 @@
                 "debugger",
                 "nette"
             ],
-            "time": "2015-10-09 14:29:03"
+            "time": "2015-10-28 23:49:21"
         }
     ],
     "packages-dev": [
         {
             "name": "nette/tester",
-            "version": "v1.5.0",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "0807e28b615af7a51acb6903d9f562ccab15fb51"
+                "reference": "b0f312e7ab9a70bbd5c92568e2a20dd46be9a529"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/0807e28b615af7a51acb6903d9f562ccab15fb51",
-                "reference": "0807e28b615af7a51acb6903d9f562ccab15fb51",
+                "url": "https://api.github.com/repos/nette/tester/zipball/b0f312e7ab9a70bbd5c92568e2a20dd46be9a529",
+                "reference": "b0f312e7ab9a70bbd5c92568e2a20dd46be9a529",
                 "shasum": ""
             },
             "require": {
@@ -1060,7 +1189,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -1077,21 +1206,21 @@
             "authors": [
                 {
                     "name": "David Grudl",
-                    "homepage": "http://davidgrudl.com"
+                    "homepage": "https://davidgrudl.com"
                 },
                 {
                     "name": "Nette Community",
-                    "homepage": "http://nette.org/contributors"
+                    "homepage": "https://nette.org/contributors"
                 }
             ],
             "description": "An easy-to-use PHP unit testing framework.",
-            "homepage": "http://nette.org",
+            "homepage": "https://tester.nette.org",
             "keywords": [
                 "nette",
                 "testing",
                 "unit"
             ],
-            "time": "2015-07-16 02:05:19"
+            "time": "2015-10-26 05:38:30"
         }
     ],
     "aliases": [],
