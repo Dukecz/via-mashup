@@ -16,6 +16,7 @@ class RouterFactory
 	public static function createRouter()
 	{
 		$router = new RouteList;
+		$router[] = new Route('api[/<class>]', 'Api:default');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}
