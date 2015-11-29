@@ -21,7 +21,7 @@
 		"latte/latte": "~2.3.0",
 		"tracy/tracy": "~2.3.0",
 
-		"nategood/httpful": "~0.2.0",
+		"guzzlehttp/guzzle": "~6.0",
 		"luracast/restler": "~3.0.0"
 	},
 	"require-dev": {
