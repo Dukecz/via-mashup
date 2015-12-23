@@ -10,3 +10,5 @@ vendor/*
 !web.config
 app/config/config.local.neon
 
+www/.well-known
+
