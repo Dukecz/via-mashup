@@ -5,6 +5,7 @@ namespace App\Presenters;
 use App\Services\ApiConfig;
 use Nette;
 use GuzzleHttp\Client;
+use Nette\Forms\Controls;
 
 
 class HomepagePresenter extends Nette\Application\UI\Presenter
@@ -37,45 +38,36 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		}
 	}
 
-	public function renderDefault()
+	/**
+	 * @param Client $client
+	 * @param string $imageUrl
+	 */
+	public function getClarifaiTags(Client $client, $imageUrl)
 	{
-		$imageUrl = "http://www.sloanlongway.org/images/default-album/tank-181.jpg";
-		$this->template->imageUrl = $imageUrl;
-
-		$clientClarifai = new Client([
-			'base_uri' => $this->apiConfig->options->clarifai['baseUrl'],
-			'timeout' => 11,
+		$response = $client->request('GET', '/v1/tag/', [
+			'query' => [
+				'url' => $imageUrl,
+			],
+			'headers' => [
+				'Authorization' => 'Bearer ' . $this->clarifaiToken,
+			],
 		]);
 
-		$this->getClarifaiToken($clientClarifai);
-		if(!empty($this->clarifaiToken)) {
-			$response = $clientClarifai->request('GET', '/v1/tag/', [
-				'query' => [
-					'url' => $imageUrl,
-				],
-				'headers' => [
-					'Authorization' => 'Bearer ' . $this->clarifaiToken,
-				],
-			]);
+		$result = json_decode($response->getBody()->getContents(), true);
 
-			$result = json_decode($response->getBody()->getContents(), true);
-
-			if ($response->getStatusCode() == 200) {
-				$this->template->tags = $result['results'][0]['result']['tag']['classes'];
-			}
-			$this->template->tagStatus = $result['status_code'] . ':' . $result['status_msg'];
+		if ($response->getStatusCode() == 200) {
+			$this->template->tags = $result['results'][0]['result']['tag']['classes'];
 		}
+		$this->template->tagStatus = $result['status_code'] . ':' . $result['status_msg'];
+	}
 
+	public function getAlchemyFaces(Client $client, $imageUrl)
+	{
 		$parameters = array(
 			'url' => $imageUrl,
 			'apikey' => $this->apiConfig->options->alchemyApi['apiKey'],
 			'outputMode' => "json",
 		);
-
-		$client = new Client([
-			'base_uri' => $this->apiConfig->options->alchemyApi['baseUrl'],
-			'timeout' => 11,
-		]);
 
 		$response = $client->request('GET', '/calls/url/URLGetRankedImageFaceTags', [
 			'query' => $parameters,
@@ -87,5 +79,36 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 			$this->template->faces = $result;
 		}
 		$this->template->faceStatus = $result['status'];
+	}
+
+	public function renderDefault()
+	{
+		$imageUrl = "http://www.sloanlongway.org/images/default-album/tank-181.jpg";
+		$this->template->imageUrl = $imageUrl;
+
+		$clientClarifai = new Client([
+			'base_uri' => $this->apiConfig->options->clarifai['baseUrl'],
+			'timeout' => 11,
+		]);
+
+		$this->getClarifaiToken($clientClarifai);
+		if (!empty($this->clarifaiToken)) {
+			$this->getClarifaiTags($clientClarifai, $imageUrl);
+		}
+
+		$clientAlchemy = new Client([
+			'base_uri' => $this->apiConfig->options->alchemyApi['baseUrl'],
+			'timeout' => 11,
+		]);
+
+		$this->getAlchemyFaces($clientAlchemy, $imageUrl);
+	}
+
+
+	protected function createComponentImageUrlForm()
+	{
+		$form = (new \ImageUrlFormFactory())->create();
+
+		return $form;
 	}
 }
