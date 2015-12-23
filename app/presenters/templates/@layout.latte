@@ -4,18 +4,24 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 
-	<title>{ifset title}{include title|striptags} | {/ifset}Nette Web</title>
+	<title>Via - Mashup</title>
 
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+    <div class="container">
+        <div class="page-header">
+            <h1>Via Mashup Project</h1>
+        </div>
+        <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	{include content}
+        {include content}
 
-	{block scripts}
-	<script src="//nette.github.io/resources/js/netteForms.min.js"></script>
-	{/block}
+        {block scripts}
+            <script src="//nette.github.io/resources/js/netteForms.min.js"></script>
+        {/block}
+	</div>
 </body>
 </html>
