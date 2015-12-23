@@ -7,6 +7,8 @@ Task for this project is to make mashup consisting of at least 3 used API. One o
 
 The following API will be used:
 
-* alchemyApi - for text recognition on images
+* alchemyApi - for face recognition on images
 * clarifai - for image tagging
-* local api - to get similar images checked before
+* mashup API - for face location visualisation on image
+
+Project is built on top of **Nette** framework using **Guzzle** API client and **Restler** API server.
