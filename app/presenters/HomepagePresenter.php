@@ -85,7 +85,9 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$imageUrl = $this->getHttpRequest()->getPost('imageUrl');
 
 		if(empty($imageUrl) || !Validators::isUrl($imageUrl)) {
-			$this->getComponent('imageUrlForm')->getComponent('imageUrl')->addError('Please enter absolute url');
+			if($this->getComponent('imageUrlForm')->isSubmitted()) {
+				$this->getComponent('imageUrlForm')->getComponent('imageUrl')->addError('Please enter absolute url');
+			}
 			return;
 		}
 
