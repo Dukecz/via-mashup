@@ -13,10 +13,12 @@ class ImageUrlFormFactory extends BootstrapFormFactory
 
 		$form->addText('url', 'Url to image:')
 			->setAttribute('placeholder', 'http://www.sloanlongway.org/images/default-album/tank-181.jpg');
+			//->setDefaultValue('http://www.sloanlongway.org/images/default-album/tank-181.jpg');
 		$form->addSubmit('send', 'Send');
 
 		self::bootstrapize($form);
 
 		return $form;
 	}
+
 }

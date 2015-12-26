@@ -58,7 +58,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		if ($response->getStatusCode() == 200) {
 			$this->template->tags = $result['results'][0]['result']['tag']['classes'];
 		}
-		$this->template->tagStatus = $result['status_code'] . ':' . $result['status_msg'];
+		$this->template->tagStatus = $result['status_code'];
 	}
 
 	public function getAlchemyFaces(Client $client, $imageUrl)
@@ -76,14 +76,17 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$result = json_decode($response->getBody()->getContents(), true);
 
 		if ($response->getStatusCode() == 200) {
-			$this->template->faces = $result;
+			$this->template->faces = $result['imageFaces'];
 		}
 		$this->template->faceStatus = $result['status'];
 	}
 
-	public function renderDefault()
+	public function renderDefault($imageUrl = null)
 	{
-		$imageUrl = "http://www.sloanlongway.org/images/default-album/tank-181.jpg";
+		if(empty($imageUrl)) {
+			return;
+		}
+
 		$this->template->imageUrl = $imageUrl;
 
 		$clientClarifai = new Client([
@@ -108,6 +111,10 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 	protected function createComponentImageUrlForm()
 	{
 		$form = (new \ImageUrlFormFactory())->create();
+
+		$form->onSuccess[] = function (Nette\Forms\Form $form, \stdClass $values) {
+			$this->redirect('Homepage:default', $values->url);
+		};
 
 		return $form;
 	}

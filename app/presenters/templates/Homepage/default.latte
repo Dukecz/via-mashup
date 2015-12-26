@@ -4,18 +4,27 @@
     {input send}
 {/form}
 
-<p>Querried image:</p>
-<img src="{$imageUrl}" />
+{ifset $imageUrl}
+    <p>Querried image:</p>
+    <img src="{$imageUrl}" />
+    <p>Url: {$imageUrl}</p>
 
-<h2>Tags</h2>
-<p>Response status: {$tagStatus}</p>
-{foreach $tags as $tag}
-    <span>{$tag}</span>
-{/foreach}
+    {ifset $tagStatus}
+        <h2>Tags</h2>
+        <p>Response status: {$tagStatus}</p>
+        {foreach $tags as $tag}
+            <span>{$tag}</span>
+        {/foreach}
+    {/ifset}
 
-<h2>Faces</h2>
-<p>Response status: {$faceStatus}</p>
-{foreach $faces as $face}
-{/foreach}
-
-{dump $faces}
+    {ifset $faceStatus}
+        <h2>Faces</h2>
+        <p>Response status: {$faceStatus}</p>
+        {foreach $faces as $face}
+            <ul>
+                <li><span>Age: {$face['age']['ageRange']}</span></li>
+                <li><span>Gender: {$face['gender']['gender']}</span></li>
+            </ul>
+        {/foreach}
+    {/ifset}
+{/ifset}
