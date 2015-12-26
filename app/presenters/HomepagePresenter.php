@@ -5,8 +5,7 @@ namespace App\Presenters;
 use App\Services\ApiConfig;
 use Nette;
 use GuzzleHttp\Client;
-use Nette\Forms\Controls;
-
+use Nette\Utils\Validators;
 
 class HomepagePresenter extends Nette\Application\UI\Presenter
 {
@@ -81,9 +80,12 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->template->faceStatus = $result['status'];
 	}
 
-	public function renderDefault($imageUrl = null)
+	public function renderDefault()
 	{
-		if(empty($imageUrl)) {
+		$imageUrl = $this->getHttpRequest()->getPost('imageUrl');
+
+		if(empty($imageUrl) || !Validators::isUrl($imageUrl)) {
+			$this->getComponent('imageUrlForm')->getComponent('imageUrl')->addError('Please enter absolute url');
 			return;
 		}
 
@@ -108,13 +110,9 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	protected function createComponentImageUrlForm()
+	protected function createComponentImageUrlForm($name)
 	{
-		$form = (new \ImageUrlFormFactory())->create();
-
-		$form->onSuccess[] = function (Nette\Forms\Form $form, \stdClass $values) {
-			$this->redirect('Homepage:default', $values->url);
-		};
+		$form = new \ImageUrlFormFactory($this, $name);
 
 		return $form;
 	}

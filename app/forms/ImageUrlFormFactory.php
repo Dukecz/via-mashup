@@ -4,21 +4,26 @@ use Nette\Application\UI\Form;
 
 class ImageUrlFormFactory extends BootstrapFormFactory
 {
+	public function __construct(Nette\ComponentModel\IContainer $parent, $name)
+	{
+		parent::__construct($parent, $name);
+
+		$this->create();
+	}
+
 	/**
-	 * @return Form
+	 * @return $this
 	 */
 	public function create()
 	{
-		$form = new Form;
+		$this->addText('imageUrl', 'Url to image:')
+			->setAttribute('placeholder', 'http://www.sloanlongway.org/images/default-album/tank-181.jpg')
+			->setRequired();
+		$this->addSubmit('send', 'Send');
 
-		$form->addText('url', 'Url to image:')
-			->setAttribute('placeholder', 'http://www.sloanlongway.org/images/default-album/tank-181.jpg');
-			//->setDefaultValue('http://www.sloanlongway.org/images/default-album/tank-181.jpg');
-		$form->addSubmit('send', 'Send');
+		self::bootstrapize($this);
 
-		self::bootstrapize($form);
-
-		return $form;
+		return $this;
 	}
 
 }

@@ -3,8 +3,13 @@
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls;
 
-class BootstrapFormFactory
+class BootstrapFormFactory  extends Form
 {
+	public function __construct(Nette\ComponentModel\IContainer $parent = NULL, $name = NULL)
+	{
+		parent::__construct($parent, $name);
+	}
+
 	protected static function bootstrapize(Form $form) {
 		$renderer = $form->getRenderer();
 		$renderer->wrappers['controls']['container'] = NULL;
