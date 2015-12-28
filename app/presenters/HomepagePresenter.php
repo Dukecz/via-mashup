@@ -20,7 +20,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 	/**
 	 * @param Client $client
 	 */
-	public function getClarifaiToken(Client $client)
+	protected function getClarifaiToken(Client $client)
 	{
 		$response = $client->request('POST', '/v1/token/', [
 			'query' => [
@@ -41,7 +41,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 	 * @param Client $client
 	 * @param string $imageUrl
 	 */
-	public function getClarifaiTags(Client $client, $imageUrl)
+	protected function getClarifaiTags(Client $client, $imageUrl)
 	{
 		$response = $client->request('GET', '/v1/tag/', [
 			'query' => [
@@ -60,7 +60,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->template->tagStatus = $result['status_code'];
 	}
 
-	public function getAlchemyFaces(Client $client, $imageUrl)
+	protected function getAlchemyFaces(Client $client, $imageUrl)
 	{
 		$parameters = array(
 			'url' => $imageUrl,
@@ -78,6 +78,22 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 			$this->template->faces = $result['imageFaces'];
 		}
 		$this->template->faceStatus = $result['status'];
+	}
+
+	protected function getMashupImage(Client $client, $imageUrl, array $facesLocations)
+	{
+		$response = $client->request('GET', '/api/imagesquaredrawing', [
+			'query' => ['imageUrl' => $imageUrl,
+						'squares' => json_encode($facesLocations),
+					],
+		]);
+
+		$result = json_decode($response->getBody()->getContents(), true);
+
+		if ($response->getStatusCode() == 200) {
+			$this->template->faceImage = $result['image'];
+		}
+		$this->template->faceImageStatus = $result['status'];
 	}
 
 	public function renderDefault()
@@ -109,6 +125,13 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		]);
 
 		$this->getAlchemyFaces($clientAlchemy, $imageUrl);
+
+		$clientMashup = new Client([
+			'base_uri' => $this->apiConfig->options->mashup['baseUrl'],
+			'timeout' => 11,
+		]);
+
+		$this->getMashupImage($clientMashup, $imageUrl, array());
 	}
 
 

@@ -17,6 +17,7 @@
 
     {ifset $faceStatus}
         <h2>Faces</h2>
+        <img src="data:image/jpeg;base64,{$faceImage}" />
         <p>Response status: {$faceStatus}</p>
         {foreach $faces as $face}
             <ul>
