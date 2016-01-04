@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use App\Api\Api;
 use App\Services\ApiConfig;
 use Nette;
 use GuzzleHttp\Client;
@@ -131,9 +132,23 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 			'timeout' => 11,
 		]);
 
-		$this->getMashupImage($clientMashup, $imageUrl, array());
-	}
+		if(!empty($this->template->faces)) {
+			$facesLocations = array();
+			foreach($this->template->faces as $face) {
+				$facesLocations[] = array(
+					'positionX' => $face['positionX'],
+					'positionY' => $face['positionY'],
+					'width' => $face['width'],
+					'height' => $face['height'],
+				);
+			}
+			$this->getMashupImage($clientMashup, $imageUrl, $facesLocations);
+		} else {
+			$this->template->faceImageStatus = 'Not called';
+		}
 
+		$this->template->colors = Api::$colors;
+	}
 
 	protected function createComponentImageUrlForm($name)
 	{

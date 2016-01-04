@@ -15,6 +15,17 @@ class Api
 		'image/png' => 'png',
 	);
 
+	public static $colors = array(
+		0 => array('r' => 0, 'g' => 0, 'b' => 0),
+		1 => array('r' => 255, 'g' => 0, 'b' => 0),
+		2 => array('r' => 0, 'g' => 255, 'b' => 0),
+		3 => array('r' => 0, 'g' => 0, 'b' => 255),
+		4 => array('r' => 255, 'g' => 128, 'b' => 255),
+		5 => array('r' => 255, 'g' => 0, 'b' => 255),
+		6 => array('r' => 0, 'g' => 255, 'b' => 255),
+		7 => array('r' => 128, 'g' => 38, 'b' => 246),
+	);
+
 	/**
 	 * @url GET imagesquaredrawing
 	 *
@@ -27,6 +38,20 @@ class Api
 		$temp = tmpfile();
 		if(!Validators::isUrl($imageUrl)) {
 			throw new RestException(400, "imageUrl must be a valid url address");
+		}
+
+		$squares = json_decode($squares, true);
+
+		foreach($squares as $key => $square) {
+			if(!isset($square['positionX'])) {
+				throw new RestException(400, "positionX parameter missing for square " . $key);
+			} else if(!isset($square['positionY'])) {
+				throw new RestException(400, "positionY parameter missing for square " . $key);
+			} else if(empty($square['width'])) {
+				throw new RestException(400, "width parameter missing for square " . $key);
+			} else if(empty($square['height'])) {
+				throw new RestException(400, "height parameter missing for square " . $key);
+			}
 		}
 
 		$remoteFile = file_get_contents($imageUrl);
@@ -56,10 +81,11 @@ class Api
 			throw new RestException(400, "not a valid image");
 		}
 
-		$result = imagerectangle($image, 0, 0, 50, 50, imagecolorallocate($image, 0, 0, 0));
-
-		if(!$result) {
-			throw new RestException(500, "unable to create result image");
+		foreach($squares as $key => $square) {
+			$result = imagerectangle($image, $square['positionX'], $square['positionY'], $square['positionX'] + $square['width'], $square['positionY'] + $square['height'], imagecolorallocate($image, self::$colors[$key]['r'], self::$colors[$key]['g'], self::$colors[$key]['b']));
+			if(!$result) {
+				throw new RestException(500, "unable to create result image");
+			}
 		}
 
 		ob_start();

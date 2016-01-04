@@ -5,24 +5,29 @@
 {ifset $imageUrl}
     <p>Querried image:</p>
     <img src="{$imageUrl}" />
-    <p>Url: {$imageUrl}</p>
 
-    {ifset $tagStatus}
-        <h2>Tags</h2>
-        <p>Response status: {$tagStatus}</p>
+    <h2>Tags</h2>
+    <p>Response status (TAG API): {$tagStatus}</p>
+    {ifset $tags}
         {foreach $tags as $tag}
             <span>{$tag}</span>
         {/foreach}
     {/ifset}
 
-    {ifset $faceStatus}
-        <h2>Faces</h2>
+    <h2>Faces</h2>
+    <p>Response status (MASHUP API): {$faceImageStatus}</p>
+    {ifset $faceImage}
         <img src="data:image/jpeg;base64,{$faceImage}" />
-        <p>Response status: {$faceStatus}</p>
-        {foreach $faces as $face}
-            <ul>
+    {/ifset}
+    <p>Response status (FACE API): {$faceStatus}</p>
+    {ifset $faces}
+        {foreach $faces as $key => $face}
+            <ul style="color: rgb({$colors[$key]['r']},{$colors[$key]['g']},{$colors[$key]['b']});">
                 <li><span>Age: {$face['age']['ageRange']}</span></li>
                 <li><span>Gender: {$face['gender']['gender']}</span></li>
+                {ifset $face['identity']}
+                    <li><span>Identity: {$face['identity']['name']}</span></li>
+                {/ifset}
             </ul>
         {/foreach}
     {/ifset}
