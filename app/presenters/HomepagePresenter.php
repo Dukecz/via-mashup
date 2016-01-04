@@ -61,6 +61,10 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->template->tagStatus = $result['status_code'];
 	}
 
+	/**
+	 * @param Client $client
+	 * @param $imageUrl
+	 */
 	protected function getAlchemyFaces(Client $client, $imageUrl)
 	{
 		$parameters = array(
@@ -81,6 +85,11 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->template->faceStatus = $result['status'];
 	}
 
+	/**
+	 * @param Client $client
+	 * @param $imageUrl
+	 * @param array $facesLocations
+	 */
 	protected function getMashupImage(Client $client, $imageUrl, array $facesLocations)
 	{
 		$response = $client->request('GET', '/api/imagesquaredrawing', [
@@ -150,6 +159,10 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 		$this->template->colors = Api::$colors;
 	}
 
+	/**
+	 * @param $name
+	 * @return \ImageUrlFormFactory
+	 */
 	protected function createComponentImageUrlForm($name)
 	{
 		$form = new \ImageUrlFormFactory($this, $name);
