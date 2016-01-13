@@ -13,4 +13,8 @@ class ApiPresenter extends Nette\Application\UI\Presenter
 		$r->addAPIClass('App\Api\Api');
 		$r->handle();
 	}
+
+	public function renderDoc() {
+
+	}
 }
